@@ -15,7 +15,7 @@ const mostrarUsuarios = () => {
 
     UsuarioModel.find({})
     .then (usuarios=>{
-        res.send(users)
+        res.send(usuarios)
     })
     .catch(error=>console.log(error))
 };
