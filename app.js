@@ -33,6 +33,3 @@ app.post('/usuarios/registro', registro);
 // app.post('/usuarios/login', login);
 // app.post('/usuarios/logout', logout);
 
-
-
-app.listen(PORT, () => console.log('server running on port ' + PORT));
