@@ -23,13 +23,15 @@ app.listen(PORT, () => console.log('server running on port ' + PORT));
 
 
 // Importes modulares
-const {mostrarUsuarios} = require('./controllers/UsuarioController');
-const {registro} = require ('./controllers/UsuarioController');
+const { mostrarUsuarios } = require('./controllers/UsuarioController');
+const { registro } = require('./controllers/UsuarioController');
+const { login } = require('./controllers/UsuarioController');
+const { logout } = require('./controllers/UsuarioController');
 
 
 //endpoints
 app.get('/usuarios/mostrar', mostrarUsuarios);
 app.post('/usuarios/registro', registro);
-// app.post('/usuarios/login', login);
-// app.post('/usuarios/logout', logout);
+app.post('/usuarios/login', login);
+app.get('/usuarios/logout', logout);
 

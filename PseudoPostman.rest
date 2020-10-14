@@ -1,5 +1,5 @@
-@url = https://backendcitas.herokuapp.com
-# @url = http://localhost:3000
+# @url = https://backendcitas.herokuapp.com
+@url = http://localhost:3000
 
 ###
 
@@ -7,12 +7,27 @@ POST {{url}}/usuarios/registro/
 Content-Type: application/json
 
 {
-    "nombre": "Adrián",
-    "apellidos": "Tortajada",
-    "telefono": "664546545",
-    "email": "adrian@gmail.com",
+    "nombre": "Rosa",
+    "apellidos": "Sabater",
+    "telefono": "664456545",
+    "email": "rosa@gmail.com",
     "password": "1234" 
 }
 ###
 
 GET {{url}}/usuarios/mostrar/
+###
+
+# @name resLogin
+POST {{url}}/usuarios/login/
+Content-Type: application/json
+
+{
+    "email": "rosa@gmail.com",
+    "password": "1234" 
+}
+###
+@token = {{resLogin.response.body.token}}
+
+GET {{url}}/usuarios/logout/
+Authorization: {{token}}
