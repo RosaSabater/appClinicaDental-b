@@ -1,1 +1,18 @@
-POST 
+# @url = https://backendcitas.herokuapp.com
+@url = http://localhost:3000
+
+###
+
+POST {{url}}/registro/
+Content-Type: application/json
+
+{
+    "nombre": "Adrián",
+    "apellidos": "Tortajada",
+    "telefono": "664546545",
+    "email": "adrian@gmail.com",
+    "password": "1234" 
+}
+###
+
+GET {{url}}/usuarios/

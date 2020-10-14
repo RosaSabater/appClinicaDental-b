@@ -15,10 +15,6 @@ const CitaSchema = new mongoose.Schema({
         type: String
     }
 
-
-
-
-
 })
 
 const CitaModel = mongoose.model('Cita', CitaSchema);
