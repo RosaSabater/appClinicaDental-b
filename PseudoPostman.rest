@@ -1,9 +1,9 @@
-# @url = https://backendcitas.herokuapp.com
-@url = http://localhost:3000
+@url = https://backendcitas.herokuapp.com
+# @url = http://localhost:3000
 
 ###
 
-POST {{url}}/registro/
+POST {{url}}/usuarios/registro/
 Content-Type: application/json
 
 {
@@ -15,4 +15,4 @@ Content-Type: application/json
 }
 ###
 
-GET {{url}}/usuarios/
+GET {{url}}/usuarios/mostrar/

@@ -1,4 +1,5 @@
-const mongoose = require ('mongoose');
+const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 
 
 const CitaSchema = new mongoose.Schema({
@@ -8,8 +9,10 @@ const CitaSchema = new mongoose.Schema({
         required: true
     },
     usuarioId: {
-        type: mongoose.Types.ObjectId(),
-        required: true
+        type: ObjectId
+    },
+    citaId: {
+        type: ObjectId
     },
     motivo: {
         type: String
@@ -17,5 +20,5 @@ const CitaSchema = new mongoose.Schema({
 
 })
 
-const CitaModel = mongoose.model('Cita', CitaSchema);
+const CitaModel = mongoose.model('cita', CitaSchema);
 module.exports = CitaModel;

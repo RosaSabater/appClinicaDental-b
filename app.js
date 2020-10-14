@@ -1,23 +1,38 @@
 const express = require('express');
-const mongoose = require('./config/mongoose.js');
-const UsuarioModel = require('./models/Usuario.js');
+const mongoose = require('./config/dbconnect.js');
 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
 app.use(express.json());
 
-app.post('/registro', (req, res) => {
-    UsuarioModel.create(req.body)
-        .then(usuario => res.status(200).send(usuario))
-        .catch(console.error)
+
+// Error CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
 });
 
-app.get('/usuarios', (req, res) => {
-    Usuario.find()
-        .then(usuarios => res.send(usuarios))
-        .catch(console.error)
-});
+app.listen(PORT, () => console.log('server running on port ' + PORT));
+
+
+
+// Importes modulares
+const {mostrarUsuarios} = require('./controllers/UsuarioController');
+const {registro} = require ('./controllers/UsuarioController');
+
+
+//endpoints
+app.get('/usuarios/mostrar', mostrarUsuarios);
+app.post('/usuarios/registro', registro);
+// app.post('/usuarios/login', login);
+// app.post('/usuarios/logout', logout);
+
+
 
 app.listen(PORT, () => console.log('server running on port ' + PORT));
