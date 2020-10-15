@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const UsuarioModel = require('../models/Usuario');
 const jwt = require('jsonwebtoken');
+const CitaModel = require('../models/Cita');
+const { ObjectID, ObjectId } = require('mongodb')
 
 
 
@@ -16,7 +18,7 @@ const registro = (req, res) => {
 const login = async (req, res) => {
 
     try {
-        let {email, password} = req.body;
+        let { email, password } = req.body;
 
         let encontrado = await UsuarioModel.findOne({ email: email, password: password });
 
@@ -90,20 +92,26 @@ const buscarUsuariosId = async (req, res) => {
     }
 };
 
-// const baja = async (req, res) => {
+const baja = async (req, res) => {
 
-//     let body = req.body;
-//     let email = body.email;
-//     let password = body.password;
+    let token = req.headers.authorization;;
 
-//     try {
-//         let usuario = await UsuarioModel.findByIdAndDelete({email: email, password: password});
+    try {
+        let usuario = await UsuarioModel.findOneAndDelete({
+            token: token
+        });
 
-//     } catch (error) {
-//         console.log(error)
-//         res.status(500).send({ message: 'No se ha podido eliminar el usuario.' });
-//     }
-// }
+        if (usuario) {
+            let borrarCitas = await CitaModel.deleteMany({ usuarioId: ObjectID(usuario._id) });
+        } 
+
+        res.send({ message: 'Se ha eliminado la cuenta correctamente.' })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: 'No se ha podido eliminar el usuario.' });
+    }
+};
 
 
-module.exports = { mostrarUsuarios, buscarUsuariosId, registro, login, logout };
+module.exports = { mostrarUsuarios, buscarUsuariosId, registro, login, logout, baja };

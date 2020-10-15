@@ -22,7 +22,7 @@ GET {{url}}/admin/usuarios/5f87031855bb7a09a44f20b0/
 
 ###
 # @name resLogin
-POST {{url}}/areaclientes/usuarios/login/
+POST {{url}}/areaclientes/login/
 Content-Type: application/json
 
 {
@@ -32,7 +32,7 @@ Content-Type: application/json
 ###
 @token = {{resLogin.response.body.token}}
 
-GET {{url}}/areaclientes/usuarios/logout/
+GET {{url}}/areaclientes/logout/
 Authorization: {{token}}
 ###
 POST {{url}}/areaclientes/nuevacita
@@ -40,7 +40,13 @@ Content-Type: application/json
 
 {
     "fecha": "2020-10-19 16:29",
-    "usuarioId": "5f87031855bb7a09a44f20b0",
+    "usuarioId": "5f88923c61d9a62ffc0d3d19",
     "motivo": "uuuuuUUUUUUUUUHHH"
 }
+###
+GET {{url}}/areaclientes/citas/5f87031855bb7a09a44f20b0
+###
+DELETE {{url}}/areaclientes/baja
+Authorization: {{token}}
+
 ###

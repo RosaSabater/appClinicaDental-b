@@ -37,6 +37,7 @@ const UsuarioSchema = new mongoose.Schema({
 UsuarioSchema.methods.toJSON = function () {
     const user = this.toObject();
     delete user.password;
+    delete token;
     delete user.__v;
     return user;
 };
