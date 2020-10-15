@@ -42,9 +42,7 @@ const login = async (req, res) => {
         encontrado.token = token;
         encontrado.save();
 
-
-
-        res.send(encontrado)
+        res.send({ email: encontrado.email })
 
     } catch (error) {
 
@@ -57,13 +55,10 @@ const login = async (req, res) => {
 
 const logout = async (req, res) => {
 
-    let body = req.body;
-    let email = body.email;
-    let password = body.password;
-
     try {
 
         const token = req.headers.authorization;
+
         let logoutUsuario = await UsuarioModel.findOne({ token: token });
 
         logoutUsuario.token = null;

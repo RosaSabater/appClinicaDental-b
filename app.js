@@ -31,7 +31,13 @@ const { logout } = require('./controllers/UsuarioController');
 
 //endpoints
 app.get('/usuarios/mostrar', mostrarUsuarios);
+
 app.post('/usuarios/registro', registro);
 app.post('/usuarios/login', login);
 app.get('/usuarios/logout', logout);
+
+// app.post('/areacliente/nuevacita', nuevaCita);
+// app.get('/areacliente/citaspendientes', citaPendiente);
+// app.post('/areacliente/cancelarcita', cancelarCita);
+
 
