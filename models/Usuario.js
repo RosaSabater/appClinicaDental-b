@@ -12,20 +12,34 @@ const UsuarioSchema = new mongoose.Schema({
     },
     telefono: {
         type: String,
-        required: true
+        required: [true, 'El teléfono es requerido.']
     },
     email: {
         type: String,
-        required: true
+        required: [true, 'El email es requerido.'],
+        unique: true
     },
     password: {
         type: String,
-        required: true
+        required: [true, 'El password es requerido.'],
+        minlength: 8
     },
     token: {
         type: String
-    }
+    },
+    // rol: {
+    //     type: String,
+    //     default: 'user',
+    //     enum: ['admin', 'cliente']
+    // }
 })
+
+UsuarioSchema.methods.toJSON = function () {
+    const user = this.toObject();
+    delete user.password;
+    delete user.__v;
+    return user;
+};
 
 const UsuarioModel = mongoose.model("usuario", UsuarioSchema);
 module.exports = UsuarioModel;

@@ -8,17 +8,25 @@ const CitaSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    usuarioId: {
-        type: ObjectId
+    estado: {
+        type: String,
+        default: 'pendiente',
+        enum: ['pendiente', 'cancelada', 'completada']
     },
-    citaId: {
+    usuarioId: {
         type: ObjectId
     },
     motivo: {
         type: String
     }
 
-})
+});
+
+CitaSchema.methods.toJSON = function () {
+    const cita = this.toObject();
+    delete cita.__v;
+    return cita;
+};
 
 const CitaModel = mongoose.model('cita', CitaSchema);
 module.exports = CitaModel;

@@ -16,10 +16,7 @@ const registro = (req, res) => {
 const login = async (req, res) => {
 
     try {
-
-        let body = req.body;
-        let email = body.email;
-        let password = body.password;
+        let {email, password} = req.body;
 
         let encontrado = await UsuarioModel.findOne({ email: email, password: password });
 
@@ -42,13 +39,11 @@ const login = async (req, res) => {
         encontrado.token = token;
         encontrado.save();
 
-        res.send({ email: encontrado.email })
+        res.send(encontrado);
 
     } catch (error) {
-
         console.log(error)
-        res.status(500).send(error)
-
+        res.status(500).send({ message: 'No se ha podido iniciar sesión.' });
     }
 };
 
@@ -56,7 +51,6 @@ const login = async (req, res) => {
 const logout = async (req, res) => {
 
     try {
-
         const token = req.headers.authorization;
 
         let logoutUsuario = await UsuarioModel.findOne({ token: token });
@@ -64,13 +58,11 @@ const logout = async (req, res) => {
         logoutUsuario.token = null;
         logoutUsuario.save();
 
-        res.send('Has cerrado sesión')
+        res.send('Has cerrado sesión.')
 
     } catch (error) {
-
         console.log(error)
-        res.status(500).send(error);
-
+        res.status(500).send({ message: 'No se ha podido cerrar sesión.' });
     }
 
 };
@@ -78,7 +70,7 @@ const logout = async (req, res) => {
 
 const mostrarUsuarios = (req, res) => {
 
-    UsuarioModel.find({})
+    UsuarioModel.find()
         .then(usuarios => {
             res.send(usuarios)
         })
@@ -86,6 +78,32 @@ const mostrarUsuarios = (req, res) => {
 };
 
 
+const buscarUsuariosId = async (req, res) => {
+
+    try {
+        let usuarios = await UsuarioModel.findById(req.params.id);
+        res.send(usuarios);
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: 'No se ha podido encontrar usuarios.' });
+    }
+};
+
+// const baja = async (req, res) => {
+
+//     let body = req.body;
+//     let email = body.email;
+//     let password = body.password;
+
+//     try {
+//         let usuario = await UsuarioModel.findByIdAndDelete({email: email, password: password});
+
+//     } catch (error) {
+//         console.log(error)
+//         res.status(500).send({ message: 'No se ha podido eliminar el usuario.' });
+//     }
+// }
 
 
-module.exports = { mostrarUsuarios, registro, login, logout };
+module.exports = { mostrarUsuarios, buscarUsuariosId, registro, login, logout };
