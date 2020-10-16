@@ -40,7 +40,7 @@ Content-Type: application/json
 
 {
     "fecha": "2020-10-19 16:29",
-    "usuarioId": "5f88923c61d9a62ffc0d3d19",
+    "usuarioId": "5f88935cf893a724f0e0f9d1",
     "motivo": "uuuuuUUUUUUUUUHHH"
 }
 ###
@@ -48,5 +48,8 @@ GET {{url}}/areaclientes/citas/5f87031855bb7a09a44f20b0
 ###
 DELETE {{url}}/areaclientes/baja
 Authorization: {{token}}
+
+###
+PUT {{url}}/areaclientes/cancelarcita/5f8958531e013729e8cf042d
 
 ###

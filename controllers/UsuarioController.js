@@ -30,16 +30,22 @@ const login = async (req, res) => {
             return res.status(401).send('Credenciales inválidas')
         }
 
-
+        
+        
         const token = jwt.sign({
-
+            
             id: encontrado._id
-
+            
         }, 'geekshubs', { expiresIn: '1d' });
-
-
+        
+        
         encontrado.token = token;
+        
         encontrado.save();
+        
+        // if (token === encontrado.token) {
+        //     return res.status(401).send('Ya has iniciado sesión anteriormente.')
+        // }
 
         res.send(encontrado);
 
@@ -94,7 +100,7 @@ const buscarUsuariosId = async (req, res) => {
 
 const baja = async (req, res) => {
 
-    let token = req.headers.authorization;;
+    let token = req.headers.authorization;
 
     try {
         let usuario = await UsuarioModel.findOneAndDelete({
@@ -103,7 +109,7 @@ const baja = async (req, res) => {
 
         if (usuario) {
             let borrarCitas = await CitaModel.deleteMany({ usuarioId: ObjectID(usuario._id) });
-        } 
+        }
 
         res.send({ message: 'Se ha eliminado la cuenta correctamente.' })
 

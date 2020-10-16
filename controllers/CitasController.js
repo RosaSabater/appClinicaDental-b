@@ -37,16 +37,23 @@ const citas = async (req, res) => {
     }
 };
 
-// const cancelarCita = async (req, res) => {
+const cancelarCita = async (req, res) => {
 
-//     try {
+    try {
+        let citaId = req.params.id;
 
-//         let borrar = await CitaModel.deleteOne({ usuarioId: ObjectID(usuario._id) });
+        let borrar = await CitaModel.findByIdAndUpdate(citaId,
+            { estado: 'cancelada' }, 
+            { new: true, useFindAndModify: false }
+        );
 
-//     } catch (error) {
-        
-//     }
-// }
+        res.send({ message: 'Se ha cancelado la cita correctamente.' })
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: 'No se ha podido cancelar la cita.' });
+    }
+};
 
 
-module.exports = { nuevaCita, citas };
+module.exports = { nuevaCita, citas, cancelarCita };

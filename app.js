@@ -24,7 +24,7 @@ app.listen(PORT, () => console.log('server running on port ' + PORT));
 
 // Importes modulares
 const { mostrarUsuarios, buscarUsuariosId, registro, login, logout, baja } = require('./controllers/UsuarioController');
-const { nuevaCita, citas } = require('./controllers/CitasController');
+const { nuevaCita, citas, cancelarCita } = require('./controllers/CitasController');
 
 //endpoints admin
 app.get('/admin/usuarios/mostrar', mostrarUsuarios);
@@ -41,7 +41,7 @@ app.delete('/areaclientes/baja', baja);
 //endpoints cita
 app.post('/areaclientes/nuevacita', nuevaCita);
 app.get('/areaclientes/citas/:id', citas);
-// app.post('/areacliente/cancelarcita', cancelarCita);
+app.put('/areaclientes/cancelarcita/:id', cancelarCita);
 
 
 
