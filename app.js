@@ -1,8 +1,8 @@
 const express = require('express');
 const mongoose = require('./config/dbconnect.js');
 const auth = require('./middleware/auth.js');
-const {validameConfig} = require("validame");
- validameConfig.language = "es";
+const { validameConfig } = require("validame");
+validameConfig.language = "es";
 
 
 const app = express();

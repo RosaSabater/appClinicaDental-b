@@ -14,7 +14,7 @@ const auth = async (req, res, next) => {
         };
 
         let existeUsuario = await UsuarioModel.findOne({ token: token });
-        
+
         if (!existeUsuario) {
             return res.status(401).send({ message: 'Token inválido.' });
         };

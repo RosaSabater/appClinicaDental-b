@@ -4,13 +4,13 @@ const jwt = require('jsonwebtoken');
 const CitaModel = require('../models/Cita');
 const { ObjectID, ObjectId } = require('mongodb')
 const bcrypt = require('bcryptjs');
-const {validame} = require("validame");
+const { validame } = require("validame");
 
 
-const registro = async (req,res) => {
+const registro = async (req, res) => {
 
     try {
-        let {nombre, apellidos, telefono, email, password} = req.body;
+        let { nombre, apellidos, telefono, email, password } = req.body;
 
         //valido campos
         let error = validame(nombre, {
@@ -18,7 +18,7 @@ const registro = async (req,res) => {
         });
 
         if (error) {
-            return res.status(400).send({ nombre: error});
+            return res.status(400).send({ nombre: error });
         };
 
         error = validame(apellidos, {
@@ -26,7 +26,7 @@ const registro = async (req,res) => {
         });
 
         if (error) {
-            return res.status(400).send({ apellidos: error});
+            return res.status(400).send({ apellidos: error });
         };
 
         error = validame(telefono, {
@@ -34,15 +34,15 @@ const registro = async (req,res) => {
         });
 
         if (error) {
-            return res.status(400).send({ telefono: error});
+            return res.status(400).send({ telefono: error });
         };
-        
+
         error = validame(email, {
             allow: "email",
         });
 
         if (error) {
-            return res.status(400).send({ email: error});
+            return res.status(400).send({ email: error });
         };
 
         error = validame(password, {
@@ -50,7 +50,7 @@ const registro = async (req,res) => {
         });
 
         if (error) {
-            return res.status(400).send({ password: error});
+            return res.status(400).send({ password: error });
         };
 
         //encripto contraseña
@@ -64,7 +64,7 @@ const registro = async (req,res) => {
             email: email,
             password: hash
         });
-        res.send({message: 'Te has registrado correctamente.'})
+        res.send({ message: 'Te has registrado correctamente.' })
 
     } catch (error) {
         console.log(error)
@@ -78,34 +78,34 @@ const login = async (req, res) => {
     try {
         let { email, password } = req.body;
 
-        let encontrado = await UsuarioModel.findOne({ email: email});
+        let encontrado = await UsuarioModel.findOne({ email: email });
 
         if (!encontrado) {
             return res.status(401).send('Credenciales inválidas.')
         }
-        
+
         let correcta = bcrypt.compareSync(password, encontrado.password);
-        
+
         if (!correcta) {
             return res.status(401).send('Credenciales inválidas')
         }
 
-        
+
         const token = jwt.sign({
-            
+
             id: encontrado._id,
             rol: encontrado.rol
-            
+
         }, 'VI2GLSb6YNOiL3lyCr0VWlPC3HrVKX4JUcf7zF6IOFdVZYXt4HCUYGKmA7yqqms', { expiresIn: '1d' });
-        
-        
+
+
         encontrado.token = token;
-        
+
         encontrado.save();
 
         res.send({
             nombre: encontrado.nombre,
-            apellidos : encontrado.apellidos,
+            apellidos: encontrado.apellidos,
             telefono: encontrado.telefono,
             email: encontrado.email,
             token: encontrado.token
@@ -123,7 +123,7 @@ const logout = async (req, res) => {
     try {
         const token = req.headers.authorization;
 
-        await UsuarioModel.findOneAndUpdate({ token: token }, {token: null});
+        await UsuarioModel.findOneAndUpdate({ token: token }, { token: null });
 
         res.send('Has cerrado sesión.')
 

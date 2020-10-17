@@ -45,7 +45,7 @@ const cancelarCita = async (req, res) => {
         let citaId = req.params.id;
 
         let borrar = await CitaModel.findByIdAndUpdate(citaId,
-            { estado: 'cancelada' }, 
+            { estado: 'cancelada' },
             { new: true, useFindAndModify: false }
         );
 
