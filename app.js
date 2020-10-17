@@ -1,5 +1,8 @@
 const express = require('express');
 const mongoose = require('./config/dbconnect.js');
+const auth = require('./middleware/auth.js');
+const {validameConfig} = require("validame");
+ validameConfig.language = "es";
 
 
 const app = express();
@@ -34,14 +37,14 @@ app.get('/admin/usuarios/:id', buscarUsuariosId);
 //endpoins usuario
 app.post('/registro', registro);
 app.post('/areaclientes/login', login);
-app.get('/areaclientes/logout', logout);
-app.delete('/areaclientes/baja', baja);
+app.get('/areaclientes/logout', auth, logout);
+app.delete('/areaclientes/baja', auth, baja);
 
 
 //endpoints cita
-app.post('/areaclientes/nuevacita', nuevaCita);
-app.get('/areaclientes/citas/:id', citas);
-app.put('/areaclientes/cancelarcita/:id', cancelarCita);
+app.post('/areaclientes/nuevacita', auth, nuevaCita);
+app.get('/areaclientes/citas/:id', auth, citas);
+app.put('/areaclientes/cancelarcita/:id', auth, cancelarCita);
 
 
 

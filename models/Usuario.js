@@ -27,16 +27,15 @@ const UsuarioSchema = new mongoose.Schema({
     token: {
         type: String
     },
-    // rol: {
-    //     type: String,
-    //     default: 'user',
-    //     enum: ['admin', 'cliente']
-    // }
+    rol: {
+        type: String,
+        default: 'cliente',
+        enum: ['admin', 'cliente']
+    }
 })
 
 UsuarioSchema.methods.toJSON = function () {
     const user = this.toObject();
-    delete user.password;
     delete token;
     delete user.__v;
     return user;

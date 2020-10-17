@@ -3,16 +3,74 @@ const UsuarioModel = require('../models/Usuario');
 const jwt = require('jsonwebtoken');
 const CitaModel = require('../models/Cita');
 const { ObjectID, ObjectId } = require('mongodb')
+const bcrypt = require('bcryptjs');
+const {validame} = require("validame");
 
 
+const registro = async (req,res) => {
 
-const registro = (req, res) => {
+    try {
+        let {nombre, apellidos, telefono, email, password} = req.body;
 
-    UsuarioModel.create(req.body)
-        .then(usuario => res.status(200).send(usuario))
-        .catch(error => console.log(error))
+        //valido campos
+        let error = validame(nombre, {
+            allow: "aA ñÑ _",
+        });
 
-};
+        if (error) {
+            return res.status(400).send({ nombre: error});
+        };
+
+        error = validame(apellidos, {
+            allow: "aA ñÑ _",
+        });
+
+        if (error) {
+            return res.status(400).send({ apellidos: error});
+        };
+
+        error = validame(telefono, {
+            allow: "phoneEs",
+        });
+
+        if (error) {
+            return res.status(400).send({ telefono: error});
+        };
+        
+        error = validame(email, {
+            allow: "email",
+        });
+
+        if (error) {
+            return res.status(400).send({ email: error});
+        };
+
+        error = validame(password, {
+            min: 4,
+        });
+
+        if (error) {
+            return res.status(400).send({ password: error});
+        };
+
+        //encripto contraseña
+        const salt = bcrypt.genSaltSync(10);
+        const hash = bcrypt.hashSync(password, salt);
+
+        await UsuarioModel.create({
+            nombre: nombre,
+            apellidos: apellidos,
+            telefono: telefono,
+            email: email,
+            password: hash
+        });
+        res.send({message: 'Te has registrado correctamente.'})
+
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({ message: 'No has podido registrarte.' });
+    }
+}
 
 
 const login = async (req, res) => {
@@ -20,34 +78,38 @@ const login = async (req, res) => {
     try {
         let { email, password } = req.body;
 
-        let encontrado = await UsuarioModel.findOne({ email: email, password: password });
+        let encontrado = await UsuarioModel.findOne({ email: email});
 
         if (!encontrado) {
-            return res.status(401).send('Credenciales inválidas.');
+            return res.status(401).send('Credenciales inválidas.')
         }
-
-        if (password !== encontrado.password) {
+        
+        let correcta = bcrypt.compareSync(password, encontrado.password);
+        
+        if (!correcta) {
             return res.status(401).send('Credenciales inválidas')
         }
 
         
-        
         const token = jwt.sign({
             
-            id: encontrado._id
+            id: encontrado._id,
+            rol: encontrado.rol
             
-        }, 'geekshubs', { expiresIn: '1d' });
+        }, 'VI2GLSb6YNOiL3lyCr0VWlPC3HrVKX4JUcf7zF6IOFdVZYXt4HCUYGKmA7yqqms', { expiresIn: '1d' });
         
         
         encontrado.token = token;
         
         encontrado.save();
-        
-        // if (token === encontrado.token) {
-        //     return res.status(401).send('Ya has iniciado sesión anteriormente.')
-        // }
 
-        res.send(encontrado);
+        res.send({
+            nombre: encontrado.nombre,
+            apellidos : encontrado.apellidos,
+            telefono: encontrado.telefono,
+            email: encontrado.email,
+            token: encontrado.token
+        });
 
     } catch (error) {
         console.log(error)
@@ -61,10 +123,7 @@ const logout = async (req, res) => {
     try {
         const token = req.headers.authorization;
 
-        let logoutUsuario = await UsuarioModel.findOne({ token: token });
-
-        logoutUsuario.token = null;
-        logoutUsuario.save();
+        await UsuarioModel.findOneAndUpdate({ token: token }, {token: null});
 
         res.send('Has cerrado sesión.')
 
@@ -107,8 +166,9 @@ const baja = async (req, res) => {
             token: token
         });
 
+        // si se da de baja se borran todas sus citas
         if (usuario) {
-            let borrarCitas = await CitaModel.deleteMany({ usuarioId: ObjectID(usuario._id) });
+            await CitaModel.deleteMany({ usuarioId: ObjectID(usuario._id) });
         }
 
         res.send({ message: 'Se ha eliminado la cuenta correctamente.' })

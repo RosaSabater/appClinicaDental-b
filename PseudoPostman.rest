@@ -37,6 +37,7 @@ Authorization: {{token}}
 ###
 POST {{url}}/areaclientes/nuevacita
 Content-Type: application/json
+Authorization: {{token}}
 
 {
     "fecha": "2020-10-19 16:29",
@@ -45,11 +46,13 @@ Content-Type: application/json
 }
 ###
 GET {{url}}/areaclientes/citas/5f87031855bb7a09a44f20b0
+Authorization: {{token}}
 ###
 DELETE {{url}}/areaclientes/baja
 Authorization: {{token}}
 
 ###
 PUT {{url}}/areaclientes/cancelarcita/5f8958531e013729e8cf042d
+Authorization: {{token}}
 
 ###
