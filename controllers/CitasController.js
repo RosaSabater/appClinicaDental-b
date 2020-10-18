@@ -48,6 +48,10 @@ const cancelarCita = async (req, res) => {
             { new: true, useFindAndModify: false }
         );
 
+        if (!borrar) {
+            return res.send({message: 'No se ha podido cancelar la cita'})
+        }
+
         res.send({ message: 'Se ha cancelado la cita correctamente.' })
 
     } catch (error) {

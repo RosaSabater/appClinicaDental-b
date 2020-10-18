@@ -21,22 +21,40 @@ Backend realizado para una clínica dental. El cliente puede pedir cita si está
 
 # Deploy ☁
 
-- El proyecto está deployado en [Heroku](https://backendcitas.herokuapp.com)
-- He usado el add-on de Heroku ClearDB MySQL para tener la base de datos en la nube.
+- El proyecto está deployado en [Heroku](https://backendcitas.herokuapp.com).
 
 <br>
 
 # Endpoints 📃
 Se pueden ejecutar sin necesidad de Postman con la extensión REST Client.<br>
-Encontraremos un archivo llamado pseudoPostman.rest donde podremos ejecutarlos.
+Encontraremos un archivo llamado PseudoPostman.rest donde podremos ejecutarlos.
 
 <br>
 
-- **GET** /peliculas/
+**Endpoints ADMIN**
 
 <br>
 
-- **POST** /usuarios/registro/
+- **GET** /admin/mostrarUsuarios/
+
+<br>
+
+- **GET** /admin/mostrarCitas/
+
+<br>
+
+- **GET** /admin/:id/
+```
+Buscamos a un usuario específico con su id.
+```
+
+<br>
+
+**Endpoints USUARIO**
+
+<br>
+
+- **POST** /registro/
 ```json
 {
     "email": "ejemplo@gmail.com",
@@ -46,73 +64,61 @@ Encontraremos un archivo llamado pseudoPostman.rest donde podremos ejecutarlos.
 
 <br>
 
-_Aquí se crea el token que durará 1 día_
-- **POST** /usuarios/login/
+
+- **POST** /areaclientes/login/
 ```json
 {
     "email": "ejemplo@gmail.com",
     "password": "1234"
 }
 ```
+```
+Aquí se crea el token que durará 1 día.
+```
 
 <br>
 
-- **POST** /usuarios/logout/
+- **GET** /areaclientes/logout/
 ```json
 Authorization: {token}
-{
-    "email": "ejemplo@gmail.com",
-    "password": "1234"
-}
 ```
 
 <br>
 
-- **POST** /usuarios/delete/
+- **DELETE** /areaclientes/baja/
 ```json
 Authorization: {token}
+```
+
+<br>
+
+**Enpoints CITAS**
+
+<br>
+
+- **POST** /areaclientes/nuevacita/
+```json
+Authorization: {{token}}
 {
-    "email": "ejemplo@gmail.com",
+    "fecha": "2020-10-19 16:29",
+    "usuarioId": "5f8c457392d0260017eb2184",
+    "motivo": "Cita para empaste"
 }
 ```
 
 <br>
 
-- **POST** /usuarios/perfil/
+- **POST** /areaclientes/citas/:id/
 ```json
 Authorization: {token}
-{
-    "UsuarioId": 1
-}
 ```
 
 <br>
 
-- **POST** /peliculas/add/
+- **PUT** /areaclientes/cancelarcita/:id/
 ```json
-{
-    "original_title": "Ejemplo",
-    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "backdrop_path": "asfadsfadf.jpg"
-}
+Authorization: {token}
 ```
-
-<br>
-
-_El alquiler de la película será de 3 días_
-- **POST** /peliculas/alquilar/
-```json
-{
-    "UsuarioId": 1,
-    "PeliculaId": 1
-}
 ```
-
-<br>
-
-- **GET** /peliculas/titulo/TITULOPELICULA/
-
-<br>
-
-- **GET** /peliculas/IDPELICULA
-
+Buscamos con la id de la cita para cancelarla.
+```

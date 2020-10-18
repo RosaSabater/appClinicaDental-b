@@ -3,29 +3,21 @@
 
 ###
 
+GET {{url}}/
+Content-Type: application/json
+
+###
+
 POST {{url}}/registro/
 Content-Type: application/json
 
 {
-    "nombre": "Rosa",
-    "apellidos": "Sabater",
-    "telefono": "664456545",
-    "email": "rosa@gmail.com",
+    "nombre": "Adrian",
+    "apellidos": "Tortajada",
+    "telefono": "664465545",
+    "email": "adrian@gmail.com",
     "password": "12345678" 
 }
-###
-
-GET {{url}}/admin/mostrarUsuarios
-Authorization: {{token}}
-###
-
-GET {{url}}/admin/mostrarCitas
-Authorization: {{token}}
-
-###
-
-GET {{url}}/admin/5f8b2cc100d04d454465fbec/
-Authorization: {{token}}
 
 ###
 # @name resLogin
@@ -33,33 +25,55 @@ POST {{url}}/areaclientes/login/
 Content-Type: application/json
 
 {
-    "email": "rosa@gmail.com",
+    "email": "adrian@gmail.com",
     "password": "12345678" 
 }
+
 ###
 @token = {{resLogin.response.body.token}}
 
 GET {{url}}/areaclientes/logout/
 Authorization: {{token}}
+
 ###
+
 POST {{url}}/areaclientes/nuevacita
 Content-Type: application/json
 Authorization: {{token}}
 
 {
     "fecha": "2020-10-19 16:29",
-    "usuarioId": "5f88935cf893a724f0e0f9d1",
-    "motivo": "uuuuuUUUUUUUUUHHH"
+    "usuarioId": "5f8c457392d0260017eb2184",
+    "motivo": "Cita para empaste"
 }
 ###
-GET {{url}}/areaclientes/citas/5f87031855bb7a09a44f20b0
+
+GET {{url}}/areaclientes/citas/5f8c457392d0260017eb2184
 Authorization: {{token}}
+
 ###
+
+PUT {{url}}/areaclientes/cancelarcita/5f8c458992d0260017eb2185
+Authorization: {{token}}
+
+###
+
 DELETE {{url}}/areaclientes/baja
 Authorization: {{token}}
 
 ###
-PUT {{url}}/areaclientes/cancelarcita/5f8958531e013729e8cf042d
+
+GET {{url}}/admin/mostrarUsuarios
+Authorization: {{token}}
+
+###
+
+GET {{url}}/admin/5f8c457392d0260017eb2184/
+Authorization: {{token}}
+
+###
+
+GET {{url}}/admin/mostrarCitas
 Authorization: {{token}}
 
 ###
