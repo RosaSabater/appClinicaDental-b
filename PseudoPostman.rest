@@ -1,5 +1,5 @@
-# @url = https://backendcitas.herokuapp.com
-@url = http://localhost:3000
+@url = https://backendcitas.herokuapp.com
+# @url = http://localhost:3000
 
 ###
 
@@ -15,10 +15,17 @@ Content-Type: application/json
 }
 ###
 
-GET {{url}}/admin/usuarios/mostrar/
+GET {{url}}/admin/mostrarUsuarios
+Authorization: {{token}}
 ###
 
-GET {{url}}/admin/usuarios/5f87031855bb7a09a44f20b0/
+GET {{url}}/admin/mostrarCitas
+Authorization: {{token}}
+
+###
+
+GET {{url}}/admin/5f8b2cc100d04d454465fbec/
+Authorization: {{token}}
 
 ###
 # @name resLogin

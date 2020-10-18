@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const CitaModel = require('../models/Cita');
-const UsuarioModel = require('../models/Usuario');
 const { ObjectID, ObjectId } = require('mongodb');
 
 

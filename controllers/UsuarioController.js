@@ -135,28 +135,6 @@ const logout = async (req, res) => {
 };
 
 
-const mostrarUsuarios = (req, res) => {
-
-    UsuarioModel.find()
-        .then(usuarios => {
-            res.send(usuarios)
-        })
-        .catch(error => console.log(error))
-};
-
-
-const buscarUsuariosId = async (req, res) => {
-
-    try {
-        let usuarios = await UsuarioModel.findById(req.params.id);
-        res.send(usuarios);
-
-    } catch (error) {
-        console.log(error)
-        res.status(500).send({ message: 'No se ha podido encontrar usuarios.' });
-    }
-};
-
 const baja = async (req, res) => {
 
     let token = req.headers.authorization;
@@ -180,4 +158,5 @@ const baja = async (req, res) => {
 };
 
 
-module.exports = { mostrarUsuarios, buscarUsuariosId, registro, login, logout, baja };
+
+module.exports = { registro, login, logout, baja };

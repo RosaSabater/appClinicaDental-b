@@ -25,13 +25,17 @@ app.listen(PORT, () => console.log('server running on port ' + PORT));
 
 
 
+app.get('/', (req,res)=>res.send('Bienvenido'));
+
 // Importes modulares
-const { mostrarUsuarios, buscarUsuariosId, registro, login, logout, baja } = require('./controllers/UsuarioController');
+const { registro, login, logout, baja } = require('./controllers/UsuarioController');
 const { nuevaCita, citas, cancelarCita } = require('./controllers/CitasController');
+const { mostrarUsuarios, buscarUsuariosId, mostrarCitas } = require('./controllers/AdminController');
 
 //endpoints admin
-app.get('/admin/usuarios/mostrar', mostrarUsuarios);
-app.get('/admin/usuarios/:id', buscarUsuariosId);
+app.get('/admin/mostrarUsuarios', auth, mostrarUsuarios);
+app.get('/admin/mostrarCitas', auth, mostrarCitas);
+app.get('/admin/:id', auth, buscarUsuariosId);
 
 
 //endpoins usuario
