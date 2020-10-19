@@ -1,6 +1,6 @@
 # ¿Qué es? 👀
 
-Backend realizado para una clínica dental. El cliente puede pedir cita si está registrado.
+Backend realizado para una clínica dental. El cliente puede pedir cita y ver sus citas pendientes. Los trabajadores podrán ver un listado de clientes, de citas y buscar a clientes por su id.
 
 - NodeJS
 - Express
@@ -8,6 +8,8 @@ Backend realizado para una clínica dental. El cliente puede pedir cita si está
 - Mongoose
 - JWT
 - Bcryptjs
+- Validame (Regex)
+- REST Client
 
 <br>
 
