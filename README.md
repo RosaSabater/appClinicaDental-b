@@ -94,7 +94,7 @@ Authorization: {{token}}
 
 <br>
 
-**Enpoints CITAS** 🕐
+**Endpoints CITAS** 🕐
 
 <br>
 
