@@ -33,7 +33,7 @@ Encontraremos un archivo llamado PseudoPostman.rest donde podremos ejecutarlos.
 
 <br>
 
-**Endpoints ADMIN**
+**Endpoints ADMIN** 🤴
 
 <br>
 
@@ -52,7 +52,7 @@ Buscamos a un usuario específico con su id.
 
 <br>
 
-**Endpoints USUARIO**
+**Endpoints USUARIO** 👥
 
 <br>
 
@@ -94,7 +94,7 @@ Authorization: {{token}}
 
 <br>
 
-**Enpoints CITAS**
+**Enpoints CITAS** 🕐
 
 <br>
 
