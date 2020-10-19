@@ -82,14 +82,14 @@ Aquí se crea el token que durará 1 día.
 
 - **GET** /areaclientes/logout/
 ```json
-Authorization: {token}
+Authorization: {{token}}
 ```
 
 <br>
 
 - **DELETE** /areaclientes/baja/
 ```json
-Authorization: {token}
+Authorization: {{token}}
 ```
 
 <br>
@@ -112,14 +112,14 @@ Authorization: {{token}}
 
 - **POST** /areaclientes/citas/:id/
 ```json
-Authorization: {token}
+Authorization: {{token}}
 ```
 
 <br>
 
 - **PUT** /areaclientes/cancelarcita/:id/
 ```json
-Authorization: {token}
+Authorization: {{token}}
 ```
 ```
 Buscamos con la id de la cita para cancelarla.
