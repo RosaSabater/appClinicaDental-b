@@ -59,8 +59,11 @@ Buscamos a un usuario específico con su id.
 - **POST** /registro/
 ```json
 {
-    "email": "ejemplo@gmail.com",
-    "password": "1234"
+    "nombre": "Test",
+    "apellidos": "Test",
+    "telefono": "999999999",
+    "email": "test@gmail.com",
+    "password": "12345678" 
 }
 ```
 
