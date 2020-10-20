@@ -1,7 +1,7 @@
 {
-  "name": "appcitas",
+  "name": "appclinicadental-b",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend realizado para una clínica dental. El cliente puede pedir cita y ver sus citas pendientes. Los trabajadores podrán ver un listado de clientes, de citas y buscar a clientes por su id.",
   "main": "app.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -14,16 +14,17 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RosaSabater/appCitas.git"
+    "url": "git+https://github.com/RosaSabater/appClinicaDental-b.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/RosaSabater/appCitas/issues"
+    "url": "https://github.com/RosaSabater/appClinicaDental-b/issues"
   },
-  "homepage": "https://github.com/RosaSabater/appCitas#readme"
+  "homepage": "https://github.com/RosaSabater/appClinicaDental-b#readme"
 }
