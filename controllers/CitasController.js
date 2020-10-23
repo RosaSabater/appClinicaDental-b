@@ -29,7 +29,8 @@ const citas = async (req, res) => {
     try {
         let usuarioId = req.params.id;
 
-        let citas = await CitaModel.find({ usuarioId: ObjectID(usuarioId) });
+        let citas = await CitaModel.find({ usuarioId: ObjectID(usuarioId) }).sort({fecha:-1});
+
         res.send(citas)
 
     } catch (error) {

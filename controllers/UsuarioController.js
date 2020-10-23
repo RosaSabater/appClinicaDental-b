@@ -104,6 +104,7 @@ const login = async (req, res) => {
         encontrado.save();
 
         res.send({
+            _id: encontrado._id,
             nombre: encontrado.nombre,
             apellidos: encontrado.apellidos,
             telefono: encontrado.telefono,

@@ -42,9 +42,9 @@ Content-Type: application/json
 Authorization: {{token}}
 
 {
-    "fecha": "2020-10-19 16:29",
-    "usuarioId": "5f8c457392d0260017eb2184",
-    "motivo": "Cita para empaste"
+    "fecha": "2022-10-25 16:29",
+    "usuarioId": "5f9288b5ba836722d4224ca0",
+    "motivo": "Cita"
 }
 ###
 
