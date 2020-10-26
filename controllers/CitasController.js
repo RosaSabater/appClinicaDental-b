@@ -50,9 +50,10 @@ const cancelarCita = async (req, res) => {
         );
 
         if (!borrar) {
-            return res.send({message: 'No se ha podido cancelar la cita'})
+            return res.status(500).send({message: 'No se ha podido cancelar la cita'})
         }
 
+        console.log(borrar)
         res.send({ message: 'Se ha cancelado la cita correctamente.' })
 
     } catch (error) {

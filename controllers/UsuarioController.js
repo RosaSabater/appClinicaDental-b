@@ -81,13 +81,13 @@ const login = async (req, res) => {
         let encontrado = await UsuarioModel.findOne({ email: email });
 
         if (!encontrado) {
-            return res.status(401).send('Credenciales inválidas.')
+            return res.status(401).send({ message: 'Credenciales inválidas.'})
         }
 
         let correcta = bcrypt.compareSync(password, encontrado.password);
 
         if (!correcta) {
-            return res.status(401).send('Credenciales inválidas')
+            return res.status(401).send({message: 'Credenciales inválidas'})
         }
 
 
