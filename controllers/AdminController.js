@@ -28,8 +28,18 @@ const mostrarCitas = async (req, res) => {
         return res.status(403).send({ message: 'Permisos insuficientes.' });
     };
 
-    let citas = await CitaModel.find({});
-    
+    // let citas = await CitaModel.find({});
+    let citas = await CitaModel.aggregate([
+        {
+            '$lookup': {
+                'from': 'usuarios',
+                'localField': 'usuarioId',
+                'foreignField': '_id',
+                'as': 'datosUsuario'
+            }
+        }
+    ]);
+
     res.send(citas)
 
 };

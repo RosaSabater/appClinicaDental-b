@@ -109,6 +109,7 @@ const login = async (req, res) => {
             apellidos: encontrado.apellidos,
             telefono: encontrado.telefono,
             email: encontrado.email,
+            rol: encontrado.rol,
             token: encontrado.token
         });
 
